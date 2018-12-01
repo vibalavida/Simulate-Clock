@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>钟表Demo</title>
+	<style type="text/css" id="css">
+		*{margin: 0;padding: 0;border: 0}
+		.radius{width: 200px;height: 200px;background-color: #eee;border: 3px black solid;border-radius: 50%;position:relative;margin: 200px auto;}
+		#ico{width: 10px;height: 10px;background-color: black;border-radius: 100%; position: relative;top:95px;left: 95px;}
+		#quarter{list-style:none;}
+		#quarter li{width: 3px;height: 5px;background:black;position:absolute;left: 98.5px;transform-origin: center 100px;}
+		#quarter li:nth-of-type(5n+1){width: 3px;height: 12px;background-color: red;}
+		#hour,#minute,#second{position: absolute;background:black;transform-origin: bottom}
+		#hour{width: 3px;height: 45px;left: 98px;top: 55px;}
+		#minute{width: 3px;height: 70px;left: 98px;top: 30px;}
+		#second{width: 3px;height: 80px;left: 98px;top: 20px;background: #4140B7;}
+	</style>
+	<script>
+		window.onload = function(){
+			// 设置DOM结点，li用于添加刻度盘
+			var ul = document.getElementById("quarter");
+			var li = "";
+			var hour = document.getElementById("hour");
+			var minute = document.getElementById("minute");
+			var second = document.getElementById("second");
+			var css = document.getElementById("css");
+			// 添加60个刻度盘，每旋转6度添加一个。
+			for(let i=0; i<60; i++){
+				li += "<li></li>";
+				css.innerHTML += "#quarter li:nth-of-type("+(i+1)+"){ transform: rotate("+(i*6)+"deg);-moz-transform: rotate("+(i*6)+"deg);-webkit-transform: rotate("+(i*6)+"deg);-o-transform: rotate("+(i*6)+"deg);}";
+			}
+			ul.innerHTML = li;
+			// 每一秒更新一次时间
+			toTime();
+			setInterval(toTime,1000);
+			function toTime(){
+				var date = new Date();
+				var s = date.getSeconds();
+				var m = date.getMinutes()+s/60;
+				var h = date.getHours()+m/60;
+				// 共有12个小时，每一小时旋转30度
+				hour.style.WebkitTransform = "rotate("+(h*30)+"deg)";
+				// 每分钟旋转6度
+				minute.style.WebkitTransform = "rotate("+(m*6)+"deg)";
+				// 每秒旋转6度
+				second.style.WebkitTransform = "rotate("+(s*6)+"deg)";
+			}
+		}
+	</script>
+</head>
+<body>
+	<div class="radius">
+		<ul id="quarter"></ul>
+		<div id="hour"></div>
+		<div id="minute"></div>
+		<div id="second"></div>
+		<div id="ico"></div>
+	</div>
+</body>
+</html> 
