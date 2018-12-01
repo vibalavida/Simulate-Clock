@@ -1,0 +1,8 @@
+我遇到了以下问题：
+1. JavaScript在添加了window.onload后无法使用，在DW下预览无反应。
+Dealed：直接使用浏览器预览，不用实时预览。这点很玄学暂时没得出解释。
+2. 无法实现旋转效果：
+Dealed：貌似必须为每个不同核心的浏览器部署不同的transform，-webkit-、-o-、-moz-、-ms-
+
+收获and不足：
+发现自己对html和css还是不太熟练，很多标签属性都会忘记，以及JavaScript，学了后感觉使用起来不好掌握。
